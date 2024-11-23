@@ -1,0 +1,10 @@
+# Synthetic Data Generation
+Here we provide codes for generating caption datas from 4 different MLLMs: [Internvl2](https://huggingface.co/OpenGVLab/InternVL2-8B), [LLaVA1.5](https://github.com/haotian-liu/LLaVA), [MiniGPT4](https://github.com/Vision-CAIR/MiniGPT-4) and [QwenVL2](https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct). Please follow the environment setup of each model. We use [Internvl2](https://huggingface.co/OpenGVLab/InternVL2-8B) to generate captions from multi-perspective, the prompts are in file **internvl.py**.
+
+For [Internvl2](https://huggingface.co/OpenGVLab/InternVL2-8B) and [QwenVL2](https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct), it's sufficient to download the huggingface model and change the **path** in **qwen.py** / **internvl.py** to your local model checkpoint path. For [LLaVA1.5](https://github.com/haotian-liu/LLaVA) and [MiniGPT4](https://github.com/Vision-CAIR/MiniGPT-4), please clone the repository and place **llava.py** / **minigpt4.py** file in parallel with the folder **llava** / **minigpt4**.
+
+To generate captions, run **bash generate.sh** by indicating the input json file and the MLLMs. The input json file consists of the images to be recaptioned. The format should be **[{"image":img_path1},{"image":img_path2},...,{"image":img_pathn}]**.
+
+Our code naturally supports multi-gpus inference. We automatically split the input json file into **numgpus** partitions and output **numgpus** files, then use **utils/merge.py** to merge the files together.
+
+To combine all the generated captions, run **utils/merge_multi_caption.py**, which takes the original caption jsonlines file in the format (for each line) **{"image":img_path,"caption":img_caption}** and the generated synthetic caption json index file in the format **{img_path1:generated_caption1,img_path2:generated_caption2,...,img_pathn:generated_captionn}**. The merged (image,multi-text) jsonlines data is in the format **{"image":img_path,"caption":\[img_caption1,...,image_captionM\]}**.

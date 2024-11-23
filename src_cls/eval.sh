@@ -1,0 +1,15 @@
+python -m training.main \
+    --model Patch-ViT-B-16 \
+    --pretrained checkpoints/epoch_100.pt \
+    --val-data test_5k_mscoco_2014.jsonl \
+    --val-data-flickr flickr.csv \
+    --csv-img-key "image" \
+    --csv-caption-key "caption" \
+    --csv-separator "," \
+    --dataset-type "jsonl" \
+    --dataset-type-flickr "csv" \
+    --cls-num $num \
+    --activate True \
+    --imagenet-val imagenet-1k/data/val_images \
+    --imagenet-r imagenet-r/imagenet-r \
+    --imagenet-a imagenet-a/imagenet-a

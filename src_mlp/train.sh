@@ -1,0 +1,27 @@
+torchrun \
+    --node_rank=$RANK \
+    --master_addr=$MASTER_ADDR --master_port=$MASTER_PORT \
+    --nnodes=1 --nproc_per_node=8 training/main.py \
+    --save-frequency 5 \
+    --report-to "tensorboard" \
+    --train-data cc12m.jsonl \
+    --val-data test_5k_mscoco_2014.jsonl \
+    --val-data-flickr validation.csv \
+    --csv-img-key "image" \
+    --csv-caption-key "caption" \
+    --csv-patch-key "jsonl" \
+    --csv-separator "," \
+    --dataset-type "jsonl" \
+    --dataset-type-flickr "csv" \
+    --warmup 2000 \
+    --batch-size=256 \
+    --lr 5e-4 \
+    --epochs=100 \
+    --workers=8 \
+    --model Patch-ViT-B-16 \
+    --seed 0 \
+    --local-loss \
+    --gather-with-grad \
+    --name cc12m_name \
+    --moe-head $num \
+    --activate True \

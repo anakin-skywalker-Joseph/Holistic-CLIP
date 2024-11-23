@@ -1,0 +1,1 @@
+torchrun --nproc_per_node=8 --nnodes=2 internvl.py --numgpus 16 --batch-size 20 --input-json your image json file
