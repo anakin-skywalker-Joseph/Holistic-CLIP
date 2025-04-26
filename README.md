@@ -10,4 +10,3 @@ In **src_cls** / **src_mlp**, we provide the training/inference code for cls/mlp
 In normal case, set **cls_num** / **moe_head** to M (if not equal to M, the matching will not be one-to-one, but free-matching.)
 
 ## Model Inference
-REPOSITORY UNDER CONSTRUCTION
